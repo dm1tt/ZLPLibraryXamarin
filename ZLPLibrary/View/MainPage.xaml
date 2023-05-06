@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:ZLPLibrary.ViewModel"
+             x:DataType="viewmodel:MainPageViewModel"
+             x:Class="ZLPLibrary.MainPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="30" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Row="0" 
+                         Grid.ColumnSpan="2"
+                         FlowDirection="LeftToRight" 
+                         BackgroundColor="#FFAD73"
+                         Orientation="Horizontal" 
+                         Padding="3">
+                <Image Source="Berserk.png"
+                       HorizontalOptions="EndAndExpand"
+                       Scale="0.8"/>
+                <Label Text="ZalupaLibrary"
+                       LineHeight="1.8"
+                       TextColor="Black"
+                       FontFamily="Roboto-Medium"
+                       FontSize="16"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       HorizontalOptions="StartAndExpand"
+                       FlexLayout.Basis="51"/>
+            </StackLayout>
+            <SearchBar Placeholder="Найти книгу"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="2"/>
+            <Button Text="Фильтры"
+                    BackgroundColor="#FF8F40"
+                    TextColor="White"
+                    FontSize="12"
+                    FontFamily="Roboto-Bold"
+                    CornerRadius="10"
+                    TextTransform="None"
+                    Margin="0"
+                    Padding="0"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    HorizontalOptions="CenterAndExpand"/>
+            <Button Text="Сортировать"
+                    BackgroundColor="#FF8F40"
+                    TextColor="White"
+                    FontSize="12"
+                    FontFamily="Roboto-Bold"
+                    CornerRadius="10"                        
+                    TextTransform="None"
+                    Margin="0"
+                    Padding="0"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    HorizontalOptions="CenterAndExpand"/>
+            <ScrollView  Grid.Row="3"
+                         Grid.ColumnSpan="2">
+                <FlexLayout BindableLayout.ItemsSource="{Binding Books}"
+                            Direction="Row"
+                            Wrap="Wrap"
+                            JustifyContent="SpaceAround"
+                            Margin="15">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="7"
+                                   WidthRequest="80"
+                                   Padding="15,10"
+                                   HeightRequest="175">
+                                <StackLayout Orientation="Vertical">
+                                    <Frame CornerRadius="5"
+                                           Padding="0,10">
+                                        <Image Source="{Binding ProductImage}"
+                                             HeightRequest="100"
+                                             Aspect="AspectFill"
+                                             Margin="-10"/>
+                                    </Frame>
+                                    <Label Text="{Binding ProductName}"
+                                       WidthRequest="100"
+                                       FontFamily="Roboto-Light"
+                                       FontSize="12"
+                                       TextColor="Black"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"
+                                       LineBreakMode="TailTruncation"/>
+                                    <Frame  Padding="0.1"
+                                        HasShadow="True"/>
+                                    <Label Text="{Binding InStock}"
+                                       WidthRequest="100"
+                                       FontFamily="Roboto-Light"
+                                       FontSize="12"
+                                       TextColor="Black"
+                                       Margin="-4"
+                                       Padding="7,0,0,0"/>
+                                    <Label Text="{Binding YearOfPublishing}"
+                                       WidthRequest="100"
+                                       LineBreakMode="TailTruncation"
+                                       FontFamily="Roboto-Light"
+                                       TextColor="Black"
+                                       FontSize="12"
+                                       Margin="-4"
+                                       Padding="7,0,0,0"/>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
