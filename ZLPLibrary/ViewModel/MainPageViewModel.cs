@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using ZLPLibrary.Model;
 using ZLPLibrary.Service;
@@ -27,7 +28,7 @@ namespace ZLPLibrary.ViewModel
         {
             get { return _shortbook.bookId; }
             set
-            {
+            {   
                 if (_shortbook.bookId != value)
                 {
                     _shortbook.bookId = value;
@@ -100,7 +101,7 @@ namespace ZLPLibrary.ViewModel
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
-        private async void LoadAllShortBooks()
+        private async Task LoadAllShortBooks()
         {
             AllShortBooks = await _productService.GetAllShortBooksAsync();
         }

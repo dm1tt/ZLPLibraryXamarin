@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using ZLPLibrary.Model;
-    
-
+using ZLPLibrary.View;
 
 namespace ZLPLibrary.Service
 {
@@ -24,6 +23,17 @@ namespace ZLPLibrary.Service
                 var content = await response.Content.ReadAsStringAsync();
                 var shortBooks = JsonConvert.DeserializeObject<List<ShortBook>>(content);
                 return shortBooks;
+            }
+            return null;
+        }
+        public async Task<FullBook> GetFullBookAsync(int bookId)
+        {
+            var response = await _httpClient.GetAsync($"{BaseUrl}/{bookId}");
+            if(response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var fullBook = JsonConvert.DeserializeObject<FullBook>(content);
+                return fullBook;
             }
             return null;
         }
