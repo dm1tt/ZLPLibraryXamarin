@@ -64,7 +64,7 @@
                     HorizontalOptions="CenterAndExpand"/>
             <ScrollView  Grid.Row="3"
                          Grid.ColumnSpan="2">
-                <FlexLayout BindableLayout.ItemsSource="{Binding Books}"
+                <FlexLayout BindableLayout.ItemsSource="{Binding AllShortBooks}"
                             Direction="Row"
                             Wrap="Wrap"
                             JustifyContent="SpaceAround"
@@ -75,15 +75,18 @@
                                    WidthRequest="80"
                                    Padding="15,10"
                                    HeightRequest="175">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer  Tapped="OnTapped" />
+                                </Frame.GestureRecognizers>
                                 <StackLayout Orientation="Vertical">
                                     <Frame CornerRadius="5"
                                            Padding="0,10">
-                                        <Image Source="{Binding ProductImage}"
+                                        <Image Source="Berserk.jpg"
                                              HeightRequest="100"
                                              Aspect="AspectFill"
                                              Margin="-10"/>
                                     </Frame>
-                                    <Label Text="{Binding ProductName}"
+                                    <Label Text="{Binding bookName}"
                                        WidthRequest="100"
                                        FontFamily="Roboto-Light"
                                        FontSize="12"
@@ -93,14 +96,14 @@
                                        LineBreakMode="TailTruncation"/>
                                     <Frame  Padding="0.1"
                                         HasShadow="True"/>
-                                    <Label Text="{Binding InStock}"
+                                    <Label Text="{Binding inStock}"
                                        WidthRequest="100"
                                        FontFamily="Roboto-Light"
                                        FontSize="12"
                                        TextColor="Black"
                                        Margin="-4"
                                        Padding="7,0,0,0"/>
-                                    <Label Text="{Binding YearOfPublishing}"
+                                    <Label Text="{Binding yearOfPublishing}"
                                        WidthRequest="100"
                                        LineBreakMode="TailTruncation"
                                        FontFamily="Roboto-Light"

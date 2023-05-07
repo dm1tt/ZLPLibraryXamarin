@@ -7,10 +7,15 @@ namespace ZLPLibrary.ViewModel
     public class BookPageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public ShortBook shortBook { get; set; }
-        public BookPageViewModel(ShortBook book)
+        public int BookId { get; set; }
+        public BookPageViewModel(int bookId)
         {
-            shortBook = book;
+            BookId = bookId;
+        }
+        protected void OnPropertyChanged(string propName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
     }
 }

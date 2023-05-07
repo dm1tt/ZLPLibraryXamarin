@@ -15,5 +15,11 @@ namespace ZLPLibrary
             BindingContext = new MainPageViewModel();
         }
 
+        private async void OnTapped(object sender, EventArgs e)
+        {
+            var frame = sender as Frame;
+            var book = frame.BindingContext as ShortBook;
+            await Navigation.PushAsync(new BookPage(book.bookId));
+        }
     }
 }

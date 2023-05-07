@@ -9,16 +9,15 @@ namespace ZLPLibrary.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class BookPage : ContentPage
 	{
-		public BookPage (ShortBook book)
+		public BookPage (int bookId)
 		{
             InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
-			BindingContext = new BookPageViewModel(book);
+			BindingContext = new BookPageViewModel(bookId);
 		}
 		async void OnTappedToBack(object sender, EventArgs e)
 		{
 			await Navigation.PopAsync();
-		}
-
+        }
     }
 }

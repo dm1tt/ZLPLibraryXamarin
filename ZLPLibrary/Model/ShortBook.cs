@@ -5,11 +5,11 @@ namespace ZLPLibrary.Model
 {
     public class ShortBook
     {
-        public int ProductId { get; set; }
+        public int bookId { get; set; }
         public string ProductImage { get; set; }
-        public string ProductName { get; set; }
-        public bool InStock { get; set; }
-        public DateTime YearOfPublishing { get; set; }
-        public string Author { get; set; }
+        public string bookName { get; set; }
+        public bool inStock { get; set; }
+        public string yearOfPublishing { get; set; }
+        public string author { get; set; }
     }
 }

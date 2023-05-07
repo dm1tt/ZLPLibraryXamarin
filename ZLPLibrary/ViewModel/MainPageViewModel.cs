@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
+using Xamarin.Forms;
 using ZLPLibrary.Model;
+using ZLPLibrary.Service;
+using ZLPLibrary.View;
 
 namespace ZLPLibrary.ViewModel
 {
@@ -9,103 +13,24 @@ namespace ZLPLibrary.ViewModel
     {
         private ShortBook _shortbook;
         public event PropertyChangedEventHandler PropertyChanged;
-        public List<ShortBook> Books { get; set; }
+        private readonly ProductService _productService;
+        public List<ShortBook> AllShortBooks { get; set; }
+
         public MainPageViewModel()
         {
+            _productService = new ProductService();
             _shortbook = new ShortBook();
-            Books = new List<ShortBook>
-            {
-                new ShortBook
-                {
-                    ProductId = 1,
-                    ProductImage = "Povelitel_muh.jpg",
-                    ProductName = "Повелитель мух",
-                    InStock = true,
-                    YearOfPublishing = DateTime.Now.Date
-                },
-                new ShortBook
-                {
-                    ProductId = 2,
-                    ProductImage = "Voyna_i_mir.jpg",
-                    ProductName = "Война и мир",
-                    InStock = true,
-                    YearOfPublishing = DateTime.Today.Date
-                },
-                new ShortBook
-                {
-                    ProductId = 3,
-                    ProductImage = "Beznadega.jpg",
-                    ProductName = "Безнадёга",
-                    InStock = true,
-                    YearOfPublishing = DateTime.Now.Date
-                },
-                new ShortBook
-                {
-                    ProductId = 4,
-                    ProductImage = "Kladbishe.jpg",
-                    ProductName = "Кладбище домашних животных",
-                    InStock = true,
-                    YearOfPublishing = DateTime.Now.Date
-                },
-                new ShortBook
-                {
-                    ProductId = 5,
-                    ProductImage = "SAO.jpg",
-                    ProductName = "Мастера меча онлайн",
-                    InStock = false,
-                    YearOfPublishing = DateTime.Now.Date
-                },
-                new ShortBook
-                {
-                    ProductId = 6,
-                    ProductImage = "Berserk.jpg",
-                    ProductName = "Берсерк",
-                    InStock = true,
-                    YearOfPublishing = DateTime.Now.Date
-                },
-                new ShortBook
-                {
-                    ProductId = 7,
-                    ProductImage = "Minecraft.jpg",
-                    ProductName = "Майнкрафт рецепты",
-                    InStock = true,
-                    YearOfPublishing = DateTime.Now.Date
-                },
-                new ShortBook
-                {
-                    ProductId = 8,
-                    ProductImage = "Boobs.jpg",
-                    ProductName = "Письки сиськи два ствола",
-                    InStock = false,
-                    YearOfPublishing = DateTime.Now.Date
-                },
-                new ShortBook
-                {
-                    ProductId = 9,
-                    ProductImage = "Gena.jpg",
-                    ProductName = "Гена Штроппин и тайная комната",
-                    InStock = true,
-                    YearOfPublishing = DateTime.Now.Date
-                },
-                 new ShortBook
-                {
-                   ProductId = 10,
-                   ProductImage = "Uspeh.jpg",
-                   ProductName = "Путь к успеху",
-                   InStock = true,
-                   YearOfPublishing = DateTime.Now.Date
-                }
-            };
-
+            AllShortBooks = new List<ShortBook>();
+            LoadAllShortBooks();
         }
-        public int ProductId
+        public int bookId
         {
-            get { return _shortbook.ProductId; }
+            get { return _shortbook.bookId; }
             set
             {
-                if (_shortbook.ProductId != value)
+                if (_shortbook.bookId != value)
                 {
-                    _shortbook.ProductId = value;
+                    _shortbook.bookId = value;
                     OnPropertyChanged("ProductImage");
                 }
             }
@@ -122,50 +47,50 @@ namespace ZLPLibrary.ViewModel
                 }
             }
         }
-        public string ProductName
+        public string bookName
         {
-            get { return _shortbook.ProductName; }
+            get { return _shortbook.bookName; }
             set
             {
-                if (_shortbook.ProductName != value)
+                if (_shortbook.bookName != value)
                 {
-                    _shortbook.ProductName = value;
+                    _shortbook.bookName = value;
                     OnPropertyChanged("ProductName");
                 }
             }
         }
-        public bool InStock
+        public bool inStock
         {
-            get { return _shortbook.InStock; }
+            get { return _shortbook.inStock; }
             set
             {
-                if (_shortbook.InStock != value)
+                if (_shortbook.inStock != value)
                 {
-                    _shortbook.InStock = value;
+                    _shortbook.inStock = value;
                     OnPropertyChanged("InStock");
                 }
             }
         }
-        public string Author
+        public string author
         {
-            get { return _shortbook.Author; }
+            get { return _shortbook.author; }
             set
             {
-                if (_shortbook.Author != value)
+                if (_shortbook.author != value)
                 {
-                    _shortbook.Author = value;
+                    _shortbook.author = value;
                     OnPropertyChanged("Author");
                 }
             }
         }
-        public DateTime YearOfPublishing
+        public string yearOfPublishing
         {
-            get { return _shortbook.YearOfPublishing; }
+            get { return _shortbook.yearOfPublishing; }
             set
             {
-                if (_shortbook.YearOfPublishing != value)
+                if (_shortbook.yearOfPublishing != value)
                 {
-                    _shortbook.YearOfPublishing = value;
+                    _shortbook.yearOfPublishing = value;
                     OnPropertyChanged("YearOfPublishing");
                 }
             }
@@ -174,6 +99,10 @@ namespace ZLPLibrary.ViewModel
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
+        private async void LoadAllShortBooks()
+        {
+            AllShortBooks = await _productService.GetAllShortBooksAsync();
         }
     }
 }
