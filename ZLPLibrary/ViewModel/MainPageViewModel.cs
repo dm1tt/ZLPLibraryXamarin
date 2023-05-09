@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 using ZLPLibrary.Model;
 using ZLPLibrary.Service;
-using ZLPLibrary.View;
 
 namespace ZLPLibrary.ViewModel
 {
@@ -32,7 +28,7 @@ namespace ZLPLibrary.ViewModel
                 if (_shortbook.bookId != value)
                 {
                     _shortbook.bookId = value;
-                    OnPropertyChanged("ProductImage");
+                    OnPropertyChanged(nameof(ProductImage));
                 }
             }
         }
@@ -44,7 +40,7 @@ namespace ZLPLibrary.ViewModel
                 if (_shortbook.ProductImage != value)
                 {
                     _shortbook.ProductImage = value;
-                    OnPropertyChanged("ProductImage");
+                    OnPropertyChanged(nameof(ProductImage));
                 }
             }
         }
@@ -56,7 +52,7 @@ namespace ZLPLibrary.ViewModel
                 if (_shortbook.bookName != value)
                 {
                     _shortbook.bookName = value;
-                    OnPropertyChanged("ProductName");
+                    OnPropertyChanged(nameof(ProductImage));
                 }
             }
         }
@@ -68,7 +64,7 @@ namespace ZLPLibrary.ViewModel
                 if (_shortbook.inStock != value)
                 {
                     _shortbook.inStock = value;
-                    OnPropertyChanged("InStock");
+                    OnPropertyChanged(nameof(ProductImage));
                 }
             }
         }
@@ -80,7 +76,7 @@ namespace ZLPLibrary.ViewModel
                 if (_shortbook.author != value)
                 {
                     _shortbook.author = value;
-                    OnPropertyChanged("Author");
+                    OnPropertyChanged(nameof(ProductImage));
                 }
             }
         }
@@ -92,14 +88,13 @@ namespace ZLPLibrary.ViewModel
                 if (_shortbook.yearOfPublishing != value)
                 {
                     _shortbook.yearOfPublishing = value;
-                    OnPropertyChanged("YearOfPublishing");
+                    OnPropertyChanged(nameof(ProductImage));
                 }
             }
         }
         protected void OnPropertyChanged(string propName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
         private async Task LoadAllShortBooks()
         {

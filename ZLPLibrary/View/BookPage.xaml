@@ -8,7 +8,6 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -46,10 +45,19 @@
                     <TapGestureRecognizer Tapped="OnTappedToBack"/>
                 </Label.GestureRecognizers>
             </Label>
-            <ScrollView  Grid.Row="2"
+            <ScrollView  Grid.Row="1"
                          Grid.ColumnSpan="2">
                 <StackLayout>
-                    <Label Text="{Binding BookId}"/>
+                    <Frame Margin="10"
+                           HeightRequest="100"
+                           WidthRequest="70"
+                           CornerRadius="10"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                        <Image Source="Berserk.jpg"
+                               Aspect="AspectFill"
+                               Margin="-20"/>
+                    </Frame>
                 </StackLayout>
             </ScrollView>
         </Grid>

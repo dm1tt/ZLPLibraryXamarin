@@ -26,14 +26,15 @@ namespace ZLPLibrary.Service
             }
             return null;
         }
-        public async Task<FullBook> GetFullBookAsync(int bookId)
+        public async Task<FullBookResponse> GetFullBookAsync(int bookId)
         {
-            var response = await _httpClient.GetAsync($"{BaseUrl}/{bookId}");
+            var response = await _httpClient.GetAsync($"{BaseUrl}/books/{bookId}");
             if(response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                var fullBook = JsonConvert.DeserializeObject<FullBook>(content);
-                return fullBook;
+                var fullBookResponse = JsonConvert.DeserializeObject<FullBookResponse>(content);
+                System.Console.WriteLine(fullBookResponse.book.bookName);
+                return fullBookResponse;
             }
             return null;
         }
