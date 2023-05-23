@@ -1,8 +1,10 @@
-﻿namespace ZLPLibrary.Model
+﻿using System;
+
+namespace ZLPLibrary.Model
 {
+    [Serializable]
     public class FullBook
     {
-        public int bookId { get; set; }
         public string typeId { get; set; }
         public string bookName { get; set; }
         public string authors { get; set; }

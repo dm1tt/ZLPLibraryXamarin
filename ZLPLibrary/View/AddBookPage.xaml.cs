@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Net;
 using Xamarin.Forms;
-using ZLPLibrary.Model;
+using ZLPLibrary.Service;
 using ZLPLibrary.ViewModel;
 
 namespace ZLPLibrary.View
 {
     public partial class AddBookPage : ContentPage
 	{
-        public FullBook fullBook;
+        private readonly ProductService _productService;
         public AddBookPage ()
-		{
+        {
 			InitializeComponent ();
+            _productService = new ProductService ();
             NavigationPage.SetHasNavigationBar(this, false);
-            BindingContext = new AddBookPageViewModel(fullBook);
+            BindingContext = new AddBookPageViewModel();
         }
         async void OnTappedToBack(object sender, EventArgs e)
         {
@@ -22,11 +22,6 @@ namespace ZLPLibrary.View
 
         private void Completed(object sender, EventArgs e)
         {
-            fullBook.bookName = bookNameEntry.Text;
-            fullBook.authors = authorsEntry.Text;
-            fullBook.numberOfPage = Convert.ToInt32(numberOfPageEntry.Text);
-            fullBook.publishingHouse = publishingHouseEntry.Text;
-            fullBook.yearOfPublication = yearOfPublishingEntry.Text;
         }
     }
 }

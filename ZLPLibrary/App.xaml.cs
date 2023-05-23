@@ -1,5 +1,6 @@
-﻿    using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using ZLPLibrary.View;
+using ZLPLibrary.ViewModel;
 
 namespace ZLPLibrary
 {

@@ -1,24 +1,113 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using ZLPLibrary.Model;
+using ZLPLibrary.Service;
 
 namespace ZLPLibrary.ViewModel
 {
     public class AddBookPageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public ICommand AddNewBookCommand { protected get; set; }
-        public AddBookPageViewModel(FullBook fullBook)
+        private readonly ProductService _productService;
+        private readonly FullBook _fullBook;
+        public FullBook FullBook { get; set; }
+        public ICommand AddNewBookCommand { get;}
+        public AddBookPageViewModel()
         {
-            AddNewBookCommand = new Command();//разберись димон дальше
+            _productService = new ProductService();
+            _fullBook = new FullBook();
+            FullBook = _fullBook;
+            AddNewBookCommand = new Command(AddNewBook);
         }
-        private void AddNewBook(FullBook fullBook)
+        public string bookName
         {
+            get { return _fullBook.bookName; }
+            set
+            {
+                if (_fullBook.bookName != value)
+                {
+                    _fullBook.bookName = value;
+                    OnPropertyChanged(nameof(bookName));
+                }
+            }
+        }
+        public string authors
+        {
+            get { return _fullBook.authors; }
+            set
+            {
+                if (_fullBook.authors != value)
+                {
+                    _fullBook.authors = value;
+                    OnPropertyChanged(nameof(authors));
+                }
+            }
+        }
+        public string typeId
+        {
+            get { return _fullBook.typeId; }
+            set
+            {
+                if (_fullBook.typeId != value)
+                {
+                    _fullBook.typeId = value;
+                    OnPropertyChanged(nameof(typeId));
+                }
+            }
+        }
+        public int? numberOfPage
+        {
+            get { return _fullBook.numberOfPage; }
+            set
+            {
+                if (_fullBook.numberOfPage != value)
+                {
+                    _fullBook.numberOfPage = value;
+                    OnPropertyChanged(nameof(numberOfPage));
+                }
+            }
+        }
+        public bool inStock
+        {
+            get { return _fullBook.inStock = true; }
+            set { _fullBook.inStock = true;}
+        }
+        public string publishingHouse
+        {
+            get { return _fullBook.publishingHouse; }
+            set
+            {
+                if (_fullBook.publishingHouse != value)
+                {
+                    _fullBook.publishingHouse = value;
+                    OnPropertyChanged(nameof(publishingHouse));
+                }
+            }
+        }
+        public string yearOfPublication
+        {
+            get { return _fullBook.yearOfPublication; }
+            set
+            {
+                if (_fullBook.yearOfPublication != value)
+                {
+                    _fullBook.yearOfPublication = value;
+                    OnPropertyChanged(nameof(yearOfPublication));
+                }
+            }
+        }
 
+        protected void OnPropertyChanged(string propName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+        }
+        public int newBookId;
+        private async void AddNewBook()
+        {
+            Console.Write("");
+            newBookId = await _productService.PostNewBookAsync(FullBook);
         }
     }
 }

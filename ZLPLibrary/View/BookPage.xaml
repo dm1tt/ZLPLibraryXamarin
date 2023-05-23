@@ -47,7 +47,7 @@
             </Label>
             <ScrollView  Grid.Row="1"
                          Grid.ColumnSpan="2">
-                <StackLayout>
+                <StackLayout BindableLayout.ItemsSource="{Binding FullBookResponse}">
                     <Frame Margin="10"
                            HeightRequest="100"
                            WidthRequest="70"
@@ -58,6 +58,72 @@
                                Aspect="AspectFill"
                                Margin="-20"/>
                     </Frame>
+                    <Label Text="{Binding FullBookResponse.book.bookName}"
+                           FontFamily="Roboto-Light"
+                           TextColor="Black"
+                           FontSize="20"
+                           HorizontalOptions="Center"/>
+                    <Label Text="{Binding FullBookResponse.book.authors}"
+                           HorizontalOptions="Center"
+                           FontFamily="Roboto-Light"
+                           TextColor="Black"
+                           FontSize="20"/>
+                    <Label Padding="10,0,0,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Тип товара: "
+                                      FontFamily="Roboto-Light"
+                                      TextColor="Black"
+                                      FontSize="15"/>
+                                <Span Text="{Binding FullBookResponse.book.typeId}"
+                                      FontFamily="Roboto-Light"
+                                      TextColor="Black"
+                                      FontSize="15"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Padding="10,0,0,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Количество страниц: "
+                                      FontFamily="Roboto-Light"
+                                      TextColor="Black"
+                                      FontSize="15"/>
+                                <Span Text="{Binding FullBookResponse.book.numberOfPage}"
+                                      FontFamily="Roboto-Light"
+                                      TextColor="Black"
+                                      FontSize="15"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Padding="10,0,0,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Издательство: "
+                                      FontFamily="Roboto-Light"
+                                      TextColor="Black"
+                                      FontSize="15"/>
+                                <Span Text="{Binding FullBookResponse.book.publishingHouse}"
+                                      FontFamily="Roboto-Light"
+                                      TextColor="Black"
+                                      FontSize="15"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Padding="10,0,0,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Год публикации: "
+                                      FontFamily="Roboto-Light"
+                                      TextColor="Black"
+                                      FontSize="15"/>
+                                <Span Text="{Binding FullBookResponse.book.yearOfPublication}"
+                                      FontFamily="Roboto-Light"
+                                      TextColor="Black"
+                                      FontSize="15"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </StackLayout>
             </ScrollView>
         </Grid>

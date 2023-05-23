@@ -47,25 +47,23 @@
             </Label>
             <StackLayout Grid.Row="1"
                          Grid.ColumnSpan="2">
-                <Entry x:Name="bookNameEntry"
-                       Placeholder="Название книги"
-                       Completed="Completed"/>
-                <Entry x:Name="authorsEntry"
-                       Placeholder="Имя автора"
-                       Completed="Completed"/>
-                <Entry x:Name="numberOfPageEntry"
+                <Entry Text="{Binding FullBook.bookName}"
+                       x:Name="bookNameEntry"
+                       Placeholder="Название книги"/>
+                <Entry Text="{Binding FullBook.authors}"
+                       Placeholder="Имя автора"/>
+                <Entry Text="{Binding FullBook.typeId}"
+                       Placeholder="Вид изделия"/>
+                <Entry Text="{Binding FullBook.numberOfPage}"
                        Placeholder="Количество страниц"
-                       Keyboard="Numeric"
-                       Completed="Completed"/>
-                <Entry x:Name="publishingHouseEntry"
-                       Placeholder="Дом издания"
-                       Completed="Completed"/>
-                <Entry x:Name="yearOfPublishingEntry"
+                       Keyboard="Numeric"/>
+                <Entry Text="{Binding FullBook.publishingHouse}"
+                       Placeholder="Дом издания"/>
+                <Entry Text="{Binding FullBook.yearOfPublication}"
                        Placeholder="Год издания"
-                       Keyboard="Numeric"
-                       Completed="Completed"/>
+                       Keyboard="Numeric"/>
                 <Button Text="Добавить книгу"
-                        Command="{Binding AddBookPageViewModel.AddNewBookCommand}"/>
+                        Command="{Binding AddNewBookCommand}"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

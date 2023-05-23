@@ -1,12 +1,16 @@
 ﻿using Xamarin.Forms;
+using ZLPLibrary.ViewModel;
 
 namespace ZLPLibrary.View
 {
     public class SplashPage : ContentPage
     {
         Image splashImage;
+        public MainPageViewModel test;
         public SplashPage()
         {
+            test = new MainPageViewModel();
+            test.LoadAllShortBooks();
             NavigationPage.SetHasNavigationBar(this, false);
 
             var sub = new AbsoluteLayout();

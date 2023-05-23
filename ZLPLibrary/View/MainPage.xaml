@@ -37,7 +37,10 @@
             </StackLayout>
             <SearchBar Placeholder="Найти книгу"
                        Grid.Row="1"
-                       Grid.ColumnSpan="2"/>
+                       Grid.ColumnSpan="2"
+                       x:Name="searchBar"
+                       SearchCommand="{Binding PerformSearch}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
             <Button Text="Фильтры"
                     BackgroundColor="#FF8F40"
                     TextColor="White"
@@ -86,7 +89,7 @@
            
             <ScrollView  Grid.Row="3"
                          Grid.ColumnSpan="2">
-                <FlexLayout BindableLayout.ItemsSource="{Binding AllShortBooks}"
+                <FlexLayout BindableLayout.ItemsSource="{Binding SearchResults}"
                             Direction="Row"
                             Wrap="Wrap"
                             JustifyContent="SpaceAround"

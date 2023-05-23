@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ZLPLibrary.Model
+﻿namespace ZLPLibrary.Model
 {
     public class ReaderTicketUsers
     {
