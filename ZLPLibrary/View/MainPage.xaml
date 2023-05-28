@@ -37,10 +37,21 @@
             </StackLayout>
             <SearchBar Placeholder="Найти книгу"
                        Grid.Row="1"
-                       Grid.ColumnSpan="2"
+                       Grid.Column="0"
                        x:Name="searchBar"
+                       FontSize="12"
                        SearchCommand="{Binding PerformSearch}"
                        SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+            <Label Text="Отменить поиск"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   TextColor="Black"
+                   FontFamily="Roboto-Light"
+                   HorizontalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CancelngSearch}" CommandParameter=""/>
+                </Label.GestureRecognizers>
+            </Label>
             <Button Text="Фильтры"
                     BackgroundColor="#FF8F40"
                     TextColor="White"
@@ -86,7 +97,6 @@
                     <TapGestureRecognizer Tapped="OnTappedAdd"/>
                 </Frame.GestureRecognizers>
             </Frame>            
-           
             <ScrollView  Grid.Row="3"
                          Grid.ColumnSpan="2">
                 <FlexLayout BindableLayout.ItemsSource="{Binding SearchResults}"

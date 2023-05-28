@@ -1,16 +1,12 @@
 ﻿using Xamarin.Forms;
-using ZLPLibrary.ViewModel;
 
 namespace ZLPLibrary.View
 {
     public class SplashPage : ContentPage
     {
         Image splashImage;
-        public MainPageViewModel test;
         public SplashPage()
         {
-            test = new MainPageViewModel();
-            test.LoadAllShortBooks();
             NavigationPage.SetHasNavigationBar(this, false);
 
             var sub = new AbsoluteLayout();
@@ -36,7 +32,7 @@ namespace ZLPLibrary.View
             await splashImage.ScaleTo(1, 2000);
             await splashImage.ScaleTo(0.9, 1500, Easing.Linear);
             await splashImage.ScaleTo(150, 1200, Easing.Linear);
-            Application.Current.MainPage = new NavigationPage(new MainPage());
+            Application.Current.MainPage = new NavigationPage(new TabbedMainPage());
 
         }
     }

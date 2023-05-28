@@ -106,7 +106,6 @@ namespace ZLPLibrary.ViewModel
         public int newBookId;
         private async void AddNewBook()
         {
-            Console.Write("");
             newBookId = await _productService.PostNewBookAsync(FullBook);
         }
     }

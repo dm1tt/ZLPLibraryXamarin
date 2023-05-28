@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:ZLPLibrary.ViewModel"
+             x:DataType="viewmodel:PersonListPageViewModel"
+             x:Class="ZLPLibrary.View.PersonListPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="25" />
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Row="0" 
+                         Grid.ColumnSpan="2"
+                         FlowDirection="LeftToRight" 
+                         BackgroundColor="#FFAD73"
+                         Orientation="Horizontal" 
+                         Padding="3">
+                <Image Source="Berserk.png"
+                       HorizontalOptions="EndAndExpand"
+                       Scale="0.8"/>
+                <Label Text="ZalupaLibrary"
+                       LineHeight="1.8"
+                       TextColor="Black"
+                       FontFamily="Roboto-Medium"
+                       FontSize="16"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       HorizontalOptions="StartAndExpand"
+                       FlexLayout.Basis="51"/>
+            </StackLayout>
+            <SearchBar Placeholder="Найти читателя"
+                       FontSize="12"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       x:Name="searchBar"/>
+            <Label Text="Отменить поиск"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   TextColor="Black"
+                   FontFamily="Roboto-Light"
+                   HorizontalOptions="Center">
+            </Label>
+            <Frame Grid.Row="0"
+                   Grid.Column="1"
+                   HorizontalOptions="End"
+                   WidthRequest="10"
+                   HeightRequest="1"
+                   CornerRadius="15"
+                   Margin="6"
+                   Padding="15,0,15,0">
+                <Label Text="+"
+                       VerticalTextAlignment="Center"
+                       FontSize="25"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       Padding="-5"
+                       TextColor="Black"
+                       FontFamily="Roboto-Light"/>
+            </Frame>
+            <ScrollView Grid.Row="2"
+                        Grid.ColumnSpan="2">
+                <CollectionView ItemsSource="{Binding AllReaders}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="7"
+                                   BackgroundColor="Peru">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Image Source="User.png"
+                                           Grid.Column="0"
+                                           Grid.RowSpan="4"
+                                           Scale="1.5"/>
+                                    <Label Text="{Binding secondName}"
+                                           Grid.Column="1"
+                                           Grid.Row="0"
+                                           FontFamily="Roboto-Light"
+                                           TextColor="Black"
+                                           FontSize="15"
+                                           HorizontalOptions="CenterAndExpand"/>
+                                    <Label Text="{Binding firstName}"
+                                           Grid.Column="2"
+                                           Grid.Row="0"/>
+                                    <Label Text="{Binding thirdName}"
+                                           Grid.Column="3"
+                                           Grid.Row="0"/>
+                                    <Label Text="{Binding ticketNumber}"
+                                           Grid.Row="3"
+                                           Grid.Column="2"
+                                           Grid.ColumnSpan="3"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

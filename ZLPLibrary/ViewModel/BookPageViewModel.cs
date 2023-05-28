@@ -19,6 +19,7 @@ namespace ZLPLibrary.ViewModel
             BookId = bookId;
             LoadFullBookAsync(bookId);
         }
+        #region
         public string typeId
         {
             get { return _fullBook.typeId; }
@@ -199,6 +200,7 @@ namespace ZLPLibrary.ViewModel
                 }
             }
         }
+        #endregion
 
         protected void OnPropertyChanged(string propName)
         {
