@@ -1,28 +1,22 @@
-﻿using System.Collections.ObjectModel;
-using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 using ZLPLibrary.Model;
 using ZLPLibrary.Service;
 
 namespace ZLPLibrary.ViewModel
 {
-    public class PersonListPageViewModel : INotifyPropertyChanged
+    public class ReaderPageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private readonly ReaderService _readerService;
         private Reader _reader;
-        private ObservableCollection<Reader> _readers;
-        private ReaderService _readerService;
-    #region
-        public ObservableCollection<Reader> AllReaders
+        public Reader Reader { get; set; }
+        #region
+        protected void OnPropertyChanged(string propName)
         {
-            get => _readers;
-            set
-            {
-                _readers = value;
-                OnPropertyChanged(nameof(AllReaders));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
         public int readerId
         {
@@ -84,44 +78,12 @@ namespace ZLPLibrary.ViewModel
                 }
             }
         }
-        #endregion  
-        public PersonListPageViewModel()
+        #endregion
+        public ReaderPageViewModel(Reader reader)
         {
-            _readers = new ObservableCollection<Reader>();
-            _reader = new Reader();
             _readerService = new ReaderService();
-            Task.Run(() => LoadAllReadersAsync());
-        }
-
-        public async Task LoadAllReadersAsync()
-        {
-            if (AllReaders != null)
-            {
-                AllReaders.CollectionChanged -= OnCollectionChanged;
-            }
-            AllReaders.Clear();
-            var readers = await _readerService.GetAllReadersAsync();
-            if (readers != null)
-            {
-                lock (AllReaders)
-                {
-                    foreach (var reader in readers)
-                    {
-                        AllReaders.Add(reader);
-                    }
-                }
-                
-            }
-            AllReaders.CollectionChanged += OnCollectionChanged;
-            OnPropertyChanged(nameof(AllReaders));
-        }
-        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            OnPropertyChanged(nameof(AllReaders));
-        }
-        private void OnPropertyChanged(string propName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+            _reader = new Reader();
+            Reader = reader;
         }
     }
 }

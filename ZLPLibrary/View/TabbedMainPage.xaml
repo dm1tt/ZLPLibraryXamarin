@@ -8,7 +8,8 @@
             android:TabbedPage.ToolbarPlacement="Bottom"
             BarTextColor="Black"
             BarBackgroundColor="#FFAD73"
-            android:TabbedPage.IsSmoothScrollEnabled="False">
+            SelectedTabColor="Black"
+            UnselectedTabColor="DarkSlateGray">
     <TabbedPage.Children>
         <local:MainPage IconImageSource="MainBook.png"/>
         <local1:PersonListPage IconImageSource="Readers.png"/>

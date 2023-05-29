@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodel="clr-namespace:ZLPLibrary.ViewModel"
-             x:DataType="viewmodel:AddBookPageViewModel"
-             x:Class="ZLPLibrary.View.AddBookPage">
+             xmlns:local="clr-namespace:ZLPLibrary.ViewModel"
+             x:Class="ZLPLibrary.View.AddNewPersonPage">
+    <ContentPage.BindingContext>
+        <local:AddNewPersonViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -42,28 +44,22 @@
                    HorizontalOptions="Start"
                    Padding="5">
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnTappedToBack"/>
+                    <TapGestureRecognizer Tapped="OnTappedToBack"
+                                          Command="{Binding UpdateReadersListCommand}"/>
                 </Label.GestureRecognizers>
             </Label>
             <StackLayout Grid.Row="1"
                          Grid.ColumnSpan="2">
-                <Entry Text="{Binding FullBook.bookName}"
-                       x:Name="bookNameEntry"
-                       Placeholder="Название книги"/>
-                <Entry Text="{Binding FullBook.authors}"
-                       Placeholder="Имя автора"/>
-                <Entry Text="{Binding FullBook.typeId}"
-                       Placeholder="Вид изделия"/>
-                <Entry Text="{Binding FullBook.numberOfPage}"
-                       Placeholder="Количество страниц"
-                       Keyboard="Numeric"/>
-                <Entry Text="{Binding FullBook.publishingHouse}"
-                       Placeholder="Дом издания"/>
-                <Entry Text="{Binding FullBook.yearOfPublication}"
-                       Placeholder="Год издания"
-                       Keyboard="Numeric"/>
-                <Button Text="Добавить книгу"
-                        Command="{Binding AddNewBookCommand}"/>
+                <Entry Text="{Binding NewReader.secondName}"
+                       Placeholder="Фамилия"/>
+                <Entry Text="{Binding NewReader.firstName}"
+                       Placeholder="Имя"/>
+                <Entry Text="{Binding NewReader.thirdName}"
+                       Placeholder="Отчество"/>
+                <Entry Text="{Binding NewReader.ticketNumber}"
+                       Placeholder="Номер читательского билета"/>
+                <Button Text="Добавить читателя"
+                        Command="{Binding AddNewPersonCommand}"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
@@ -12,34 +13,13 @@ namespace ZLPLibrary.ViewModel
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
-        private ShortBook _shortbook;
-        private readonly ProductService _productService;
-        private ObservableCollection<ShortBook> _books;
-        private ObservableCollection<ShortBook> _searchResults;
-        public ICommand CancelngSearch => new Command<string>((string query) =>
-        {
-            SearchResults = GetSearchResults("");
-        });
-        public ICommand PerformSearch => new Command<string>((string query) =>
-        {
-            SearchResults = GetSearchResults(query);
-        });
-        public MainPageViewModel()
-        {
-            _productService = new ProductService();
-            _shortbook = new ShortBook();
-            _books = new ObservableCollection<ShortBook>();
-            FilteredBooks = new ObservableCollection<ShortBook>();
-            AllShortBooks = App.ShortBooks;
-            _searchResults = AllShortBooks;
-            LoadAllShortBooks();
-        }
+         #region       
         public ObservableCollection<ShortBook> GetSearchResults(string queryString)
         {
             var normalizedQuery = queryString?.ToLower() ?? null;            
             return new ObservableCollection<ShortBook>(AllShortBooks.Where(n => n.bookName.Contains(normalizedQuery)));
         }
-        #region
+
         public ObservableCollection<ShortBook> SearchResults
         {
             get
@@ -71,10 +51,8 @@ namespace ZLPLibrary.ViewModel
             get { return _filteredBooks; }
             set
             {
-
                     _filteredBooks = value;
                     OnPropertyChanged(nameof(FilteredBooks));
-
             }
         }
         public int bookId
@@ -84,7 +62,7 @@ namespace ZLPLibrary.ViewModel
             {
 
                     _shortbook.bookId = value;
-                    OnPropertyChanged(nameof(ProductImage));
+                    OnPropertyChanged(nameof(bookId));
 
             }
         }
@@ -107,20 +85,24 @@ namespace ZLPLibrary.ViewModel
             {
 
                 _shortbook.bookName = value;
-                OnPropertyChanged(nameof(ProductImage));
+                OnPropertyChanged(nameof(bookName));
 
             }
         }
-        public bool inStock
+
+        private string _instock = "";
+        public string inStock
         {
-            get { return _shortbook.inStock; }
+            get {
+                return _instock;
+            }
             set
             {
-                if (_shortbook.inStock != value)
-                {
-                    _shortbook.inStock = value;
-                    OnPropertyChanged(nameof(ProductImage));
-                }
+                if (Boolean.Parse(value))
+                    _instock =  "В наличии";
+                else
+                    _instock =  "Нет в наличии";
+                OnPropertyChanged(nameof(inStock));
             }
         }
         public string author
@@ -129,7 +111,7 @@ namespace ZLPLibrary.ViewModel
             set
             {
                 _shortbook.author = value;
-                OnPropertyChanged(nameof(ProductImage));
+                OnPropertyChanged(nameof(author));
             }
         }
         public string yearOfPublishing
@@ -140,21 +122,47 @@ namespace ZLPLibrary.ViewModel
                 if (_shortbook.yearOfPublishing != value)
                 {
                     _shortbook.yearOfPublishing = value;
-                    OnPropertyChanged(nameof(ProductImage));
+                    OnPropertyChanged(nameof(yearOfPublishing));
                 }
             }
         }
         #endregion
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propName)
+
+        private ShortBook _shortbook;
+        private readonly ProductService _productService;
+        private ObservableCollection<ShortBook> _books;
+        private ObservableCollection<ShortBook> _searchResults;        
+
+        public ICommand CancelngSearch => new Command<string>((string query) =>
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+            SearchResults = GetSearchResults("");
+        });
+        public ICommand PerformSearch => new Command<string>((string query) =>
+        {
+            SearchResults = GetSearchResults(query);
+        });
+        public MainPageViewModel()
+        {
+            _productService = new ProductService();
+            _shortbook = new ShortBook();
+            _books = new ObservableCollection<ShortBook>();
+            FilteredBooks = new ObservableCollection<ShortBook>();
+            _searchResults = AllShortBooks;
+            Task.Run(() => LoadAllShortBooks());
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         private async Task LoadAllShortBooks()
         {
-            AllShortBooks.CollectionChanged -= OnCollectionChanged;
+            if (AllShortBooks != null)
+            {
+                AllShortBooks.CollectionChanged -= OnCollectionChanged;
+            }
             AllShortBooks.Clear();
-            App.ShortBooks = await _productService.GetAllShortBooksAsync();
             var shortBooks = await _productService.GetAllShortBooksAsync();
             if(shortBooks != null)
             {

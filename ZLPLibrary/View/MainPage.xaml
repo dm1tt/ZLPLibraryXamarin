@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodel="clr-namespace:ZLPLibrary.ViewModel"
-             x:DataType="viewmodel:MainPageViewModel"
+             xmlns:local="clr-namespace:ZLPLibrary.ViewModel"
              x:Class="ZLPLibrary.MainPage">
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -22,10 +24,10 @@
                          BackgroundColor="#FFAD73"
                          Orientation="Horizontal" 
                          Padding="3">
-                <Image Source="Berserk.png"
+                <Image Source="MegaBook.png"
                        HorizontalOptions="EndAndExpand"
                        Scale="0.8"/>
-                <Label Text="ZalupaLibrary"
+                <Label Text="ZLPLibrary"
                        LineHeight="1.8"
                        TextColor="Black"
                        FontFamily="Roboto-Medium"
@@ -94,7 +96,7 @@
                        TextColor="Black"
                        FontFamily="Roboto-Light"/>
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnTappedAdd"/>
+                    <TapGestureRecognizer Tapped="OnTappedAddNewBook"/>
                 </Frame.GestureRecognizers>
             </Frame>            
             <ScrollView  Grid.Row="3"

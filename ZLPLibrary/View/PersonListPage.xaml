@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodel="clr-namespace:ZLPLibrary.ViewModel"
-             x:DataType="viewmodel:PersonListPageViewModel"
+             xmlns:local="clr-namespace:ZLPLibrary.ViewModel"
              x:Class="ZLPLibrary.View.PersonListPage">
+    <ContentPage.BindingContext>
+        <local:PersonListPageViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -21,10 +23,10 @@
                          BackgroundColor="#FFAD73"
                          Orientation="Horizontal" 
                          Padding="3">
-                <Image Source="Berserk.png"
+                <Image Source="MegaBook.png"
                        HorizontalOptions="EndAndExpand"
                        Scale="0.8"/>
-                <Label Text="ZalupaLibrary"
+                <Label Text="ZLPLibrary"
                        LineHeight="1.8"
                        TextColor="Black"
                        FontFamily="Roboto-Medium"
@@ -63,32 +65,39 @@
                        Padding="-5"
                        TextColor="Black"
                        FontFamily="Roboto-Light"/>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTappedAddNewReader"/>
+                </Frame.GestureRecognizers>
             </Frame>
             <ScrollView Grid.Row="2"
                         Grid.ColumnSpan="2">
                 <CollectionView ItemsSource="{Binding AllReaders}">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical"
-                                           ItemSpacing="10"/>
-                    </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame CornerRadius="7"
-                                   BackgroundColor="Peru">
+                                   HasShadow="True"
+                                   Margin="-5">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer  Tapped="OnTapped" />
+                                </Frame.GestureRecognizers>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
+                                        <RowDefinition Height="19"/>
+                                        <RowDefinition Height="0.01"/>
+                                        <RowDefinition Height="19"/>
                                     </Grid.RowDefinitions>
                                     <Image Source="User.png"
                                            Grid.Column="0"
-                                           Grid.RowSpan="4"
-                                           Scale="1.5"/>
+                                           Grid.RowSpan="3"
+                                           Scale="1.5"
+                                           HeightRequest="50"
+                                           VerticalOptions="Center"/>
                                     <Label Text="{Binding secondName}"
                                            Grid.Column="1"
                                            Grid.Row="0"
@@ -98,14 +107,29 @@
                                            HorizontalOptions="CenterAndExpand"/>
                                     <Label Text="{Binding firstName}"
                                            Grid.Column="2"
-                                           Grid.Row="0"/>
+                                           Grid.Row="0"
+                                           FontFamily="Roboto-Light"
+                                           TextColor="Black"
+                                           FontSize="15"
+                                           HorizontalOptions="CenterAndExpand"/>
                                     <Label Text="{Binding thirdName}"
                                            Grid.Column="3"
-                                           Grid.Row="0"/>
+                                           Grid.Row="0"
+                                           FontFamily="Roboto-Light"
+                                           TextColor="Black"
+                                           FontSize="15"
+                                           HorizontalOptions="CenterAndExpand"/>
+                                    <Frame Grid.ColumnSpan="3"
+                                           Grid.Row="1"
+                                           Grid.Column="1"
+                                           Padding="0.1"/>
                                     <Label Text="{Binding ticketNumber}"
-                                           Grid.Row="3"
-                                           Grid.Column="2"
-                                           Grid.ColumnSpan="3"/>
+                                           Grid.Row="2"
+                                           Grid.Column="1"
+                                           Grid.ColumnSpan="3"
+                                           FontFamily="Roboto-Light"
+                                           TextColor="Black"
+                                           FontSize="15"/>
                                 </Grid>
                             </Frame>
                         </DataTemplate>

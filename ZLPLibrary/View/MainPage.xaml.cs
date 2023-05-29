@@ -11,8 +11,8 @@ namespace ZLPLibrary
         public MainPage()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = new MainPageViewModel();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
         private async void OnTapped(object sender, EventArgs e)
         {
@@ -21,7 +21,7 @@ namespace ZLPLibrary
             await Navigation.PushAsync(new BookPage(book.bookId));
         }
       
-        private async void OnTappedAdd (object sender, EventArgs e)
+        private async void OnTappedAddNewBook (object sender, EventArgs e)
         {
             await Navigation.PushAsync(new AddBookPage());
         }

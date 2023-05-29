@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:ZLPLibrary.ViewModel"
-             x:DataType="viewmodel:AddBookPageViewModel"
-             x:Class="ZLPLibrary.View.AddBookPage">
+             x:DataType="viewmodel:ReaderPageViewModel"
+             x:Class="ZLPLibrary.View.ReaderPage">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -45,26 +45,6 @@
                     <TapGestureRecognizer Tapped="OnTappedToBack"/>
                 </Label.GestureRecognizers>
             </Label>
-            <StackLayout Grid.Row="1"
-                         Grid.ColumnSpan="2">
-                <Entry Text="{Binding FullBook.bookName}"
-                       x:Name="bookNameEntry"
-                       Placeholder="Название книги"/>
-                <Entry Text="{Binding FullBook.authors}"
-                       Placeholder="Имя автора"/>
-                <Entry Text="{Binding FullBook.typeId}"
-                       Placeholder="Вид изделия"/>
-                <Entry Text="{Binding FullBook.numberOfPage}"
-                       Placeholder="Количество страниц"
-                       Keyboard="Numeric"/>
-                <Entry Text="{Binding FullBook.publishingHouse}"
-                       Placeholder="Дом издания"/>
-                <Entry Text="{Binding FullBook.yearOfPublication}"
-                       Placeholder="Год издания"
-                       Keyboard="Numeric"/>
-                <Button Text="Добавить книгу"
-                        Command="{Binding AddNewBookCommand}"/>
-            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

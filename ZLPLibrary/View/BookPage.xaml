@@ -20,10 +20,10 @@
                          BackgroundColor="#FFAD73"
                          Orientation="Horizontal" 
                          Padding="3">
-                <Image Source="Berserk.png"
+                <Image Source="MegaBook.png"
                        HorizontalOptions="EndAndExpand"
                        Scale="0.8"/>
-                <Label Text="ZalupaLibrary"
+                <Label Text="ZLPLibrary"
                        LineHeight="1.8"
                        TextColor="Black"
                        FontFamily="Roboto-Medium"

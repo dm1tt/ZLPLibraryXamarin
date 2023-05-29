@@ -14,13 +14,8 @@ namespace ZLPLibrary.ViewModel
         private readonly FullBook _fullBook;
         public FullBook FullBook { get; set; }
         public ICommand AddNewBookCommand { get;}
-        public AddBookPageViewModel()
-        {
-            _productService = new ProductService();
-            _fullBook = new FullBook();
-            FullBook = _fullBook;
-            AddNewBookCommand = new Command(AddNewBook);
-        }
+        
+        #region
         public string bookName
         {
             get { return _fullBook.bookName; }
@@ -98,7 +93,14 @@ namespace ZLPLibrary.ViewModel
                 }
             }
         }
-
+        #endregion
+        public AddBookPageViewModel()
+        {
+            _productService = new ProductService();
+            _fullBook = new FullBook();
+            FullBook = _fullBook;
+            AddNewBookCommand = new Command(AddNewBook);
+        }
         protected void OnPropertyChanged(string propName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));

@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.Net;
+using System.Threading.Tasks;
 using ZLPLibrary.Model;
 using ZLPLibrary.Service;
 
@@ -17,7 +19,7 @@ namespace ZLPLibrary.ViewModel
         {
             _productService = new ProductService();
             BookId = bookId;
-            LoadFullBookAsync(bookId);
+            Task.Run(() => LoadFullBookAsync(BookId));
         }
         #region
         public string typeId
@@ -206,7 +208,7 @@ namespace ZLPLibrary.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
-        private async void LoadFullBookAsync(int bookId)
+        private async Task LoadFullBookAsync(int bookId)
         {
             FullBookResponse = await _productService.GetFullBookAsync(bookId);
         }

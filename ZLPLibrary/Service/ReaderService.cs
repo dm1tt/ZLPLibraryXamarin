@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text;
@@ -27,6 +27,12 @@ namespace ZLPLibrary.Service
                 return readers;
             }
             return null;
+        }
+        public async Task PostNewBookAsync(Reader newReader)
+        {
+            string newJson = JsonSerializer.Serialize(newReader);
+            var content = new StringContent(newJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await _httpClient.PostAsync($"{BaseUrl}/readers", content);
         }
     }
 }
