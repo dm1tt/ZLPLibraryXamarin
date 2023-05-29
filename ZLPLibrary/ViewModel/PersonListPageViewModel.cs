@@ -3,6 +3,8 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 using ZLPLibrary.Model;
 using ZLPLibrary.Service;
 
@@ -14,14 +16,30 @@ namespace ZLPLibrary.ViewModel
         private Reader _reader;
         private ObservableCollection<Reader> _readers;
         private ReaderService _readerService;
-    #region
+        private ObservableCollection<Reader> _searchResults;
+        #region
+        public ObservableCollection<Reader> SearchResults
+        {
+            get
+            {
+                return _searchResults;
+            }
+            set
+            {
+                _searchResults = value;
+                OnPropertyChanged(nameof(SearchResults));
+            }
+        }
         public ObservableCollection<Reader> AllReaders
         {
-            get => _readers;
+            get
+            {
+                return _readers;
+            }
             set
             {
                 _readers = value;
-                OnPropertyChanged(nameof(AllReaders));
+                OnPropertyChanged(nameof(_readers));
             }
         }
         public int readerId
@@ -84,12 +102,26 @@ namespace ZLPLibrary.ViewModel
                 }
             }
         }
-        #endregion  
+        public ObservableCollection<Reader> GetSearchResults(string queryString)
+        {
+            var normalizedQuery = queryString;
+            return new ObservableCollection<Reader>(AllReaders.Where(n => n.secondName.Contains(normalizedQuery)));
+        }
+        #endregion
+        public ICommand CancelngSearch => new Command<string>((string query) =>
+        {
+            SearchResults = GetSearchResults("");
+        });
+        public ICommand PerformSearch => new Command<string>((string query) =>
+        {
+            SearchResults = GetSearchResults(query);
+        });
         public PersonListPageViewModel()
         {
             _readers = new ObservableCollection<Reader>();
             _reader = new Reader();
             _readerService = new ReaderService();
+            _searchResults = AllReaders;
             Task.Run(() => LoadAllReadersAsync());
         }
 

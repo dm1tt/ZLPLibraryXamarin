@@ -14,11 +14,7 @@ namespace ZLPLibrary.ViewModel
     public class MainPageViewModel : INotifyPropertyChanged
     {
          #region       
-        public ObservableCollection<ShortBook> GetSearchResults(string queryString)
-        {
-            var normalizedQuery = queryString?.ToLower() ?? null;            
-            return new ObservableCollection<ShortBook>(AllShortBooks.Where(n => n.bookName.Contains(normalizedQuery)));
-        }
+        
 
         public ObservableCollection<ShortBook> SearchResults
         {
@@ -44,17 +40,7 @@ namespace ZLPLibrary.ViewModel
                 }
             }
         }
-      
-        private ObservableCollection<ShortBook> _filteredBooks;
-        public ObservableCollection<ShortBook> FilteredBooks
-        {
-            get { return _filteredBooks; }
-            set
-            {
-                    _filteredBooks = value;
-                    OnPropertyChanged(nameof(FilteredBooks));
-            }
-        }
+     
         public int bookId
         {
             get { return _shortbook.bookId; }
@@ -80,13 +66,14 @@ namespace ZLPLibrary.ViewModel
         }
         public string bookName
         {
-            get => _shortbook.bookName; 
+            get { return _shortbook.bookName; }
             set
             {
-
-                _shortbook.bookName = value;
-                OnPropertyChanged(nameof(bookName));
-
+                if (_shortbook.bookName != value)
+                {
+                    _shortbook.bookName = value;
+                    OnPropertyChanged(nameof(bookName));
+                }
             }
         }
 
@@ -126,12 +113,17 @@ namespace ZLPLibrary.ViewModel
                 }
             }
         }
+        public ObservableCollection<ShortBook> GetSearchResults(string queryString)
+        {
+            var normalizedQuery = queryString?.ToLower() ?? null;
+            return new ObservableCollection<ShortBook>(AllShortBooks.Where(n => n.bookName.Contains(normalizedQuery)));
+        }
         #endregion
 
         private ShortBook _shortbook;
         private readonly ProductService _productService;
         private ObservableCollection<ShortBook> _books;
-        private ObservableCollection<ShortBook> _searchResults;        
+        private ObservableCollection<ShortBook> _searchResults;
 
         public ICommand CancelngSearch => new Command<string>((string query) =>
         {
@@ -143,12 +135,12 @@ namespace ZLPLibrary.ViewModel
         });
         public MainPageViewModel()
         {
+            Task.Run(() => LoadAllShortBooks());
             _productService = new ProductService();
             _shortbook = new ShortBook();
             _books = new ObservableCollection<ShortBook>();
-            FilteredBooks = new ObservableCollection<ShortBook>();
+            AllShortBooks = _books;
             _searchResults = AllShortBooks;
-            Task.Run(() => LoadAllShortBooks());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

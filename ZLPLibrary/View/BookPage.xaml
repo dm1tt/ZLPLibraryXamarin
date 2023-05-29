@@ -45,6 +45,17 @@
                     <TapGestureRecognizer Tapped="OnTappedToBack"/>
                 </Label.GestureRecognizers>
             </Label>
+            <Frame Grid.Column="1"
+                   HorizontalOptions="End"
+                   Padding="7"
+                   BackgroundColor="#FFAD73"
+                   HasShadow="False">
+                <Image Source="AddTicket.png"/>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTappedAddTicketPage"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+            
             <ScrollView  Grid.Row="1"
                          Grid.ColumnSpan="2">
                 <StackLayout BindableLayout.ItemsSource="{Binding FullBookResponse}">

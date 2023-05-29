@@ -40,13 +40,18 @@
                        FontSize="12"
                        Grid.Row="1"
                        Grid.Column="0"
-                       x:Name="searchBar"/>
+                       x:Name="searchBar"
+                       SearchCommand="{Binding PerformSearch}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
             <Label Text="Отменить поиск"
                    Grid.Row="1"
                    Grid.Column="1"
                    TextColor="Black"
                    FontFamily="Roboto-Light"
                    HorizontalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CancelngSearch}" CommandParameter=""/>
+                </Label.GestureRecognizers>
             </Label>
             <Frame Grid.Row="0"
                    Grid.Column="1"
@@ -71,7 +76,7 @@
             </Frame>
             <ScrollView Grid.Row="2"
                         Grid.ColumnSpan="2">
-                <CollectionView ItemsSource="{Binding AllReaders}">
+                <CollectionView ItemsSource="{Binding SearchResults}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame CornerRadius="7"

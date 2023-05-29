@@ -12,7 +12,11 @@ namespace ZLPLibrary.View
             NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = new BookPageViewModel(bookId);
         }
-		async void OnTappedToBack(object sender, EventArgs e)
+        private async void OnTappedAddTicketPage(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddTicketPage());
+        }
+        async void OnTappedToBack(object sender, EventArgs e)
 		{
 			await Navigation.PopAsync();
         }

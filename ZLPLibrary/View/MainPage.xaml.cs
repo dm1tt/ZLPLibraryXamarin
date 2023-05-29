@@ -20,7 +20,6 @@ namespace ZLPLibrary
             var book = frame.BindingContext as ShortBook;
             await Navigation.PushAsync(new BookPage(book.bookId));
         }
-      
         private async void OnTappedAddNewBook (object sender, EventArgs e)
         {
             await Navigation.PushAsync(new AddBookPage());

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ZLPLibrary.ViewModel"
+             x:Class="ZLPLibrary.View.AddTicketPage">
+    <ContentPage.BindingContext>
+        <local:AddTicketPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Row="0" 
+                         Grid.ColumnSpan="2"
+                         FlowDirection="LeftToRight" 
+                         BackgroundColor="#FFAD73"
+                         Orientation="Horizontal" 
+                         Padding="3">
+                <Image Source="MegaBook.png"
+                       HorizontalOptions="EndAndExpand"
+                       Scale="0.8"/>
+                <Label Text="ZLPLibrary"
+                       LineHeight="1.8"
+                       TextColor="Black"
+                       FontFamily="Roboto-Medium"
+                       FontSize="16"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       HorizontalOptions="StartAndExpand"
+                       FlexLayout.Basis="51"/>
+            </StackLayout>
+            <Label Text="Назад"
+                   TextColor="Black"
+                   HorizontalTextAlignment="Start"
+                   VerticalTextAlignment="Center"
+                   HeightRequest="40"
+                   WidthRequest="58"
+                   HorizontalOptions="Start"
+                   Padding="5"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
