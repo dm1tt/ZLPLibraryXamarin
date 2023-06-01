@@ -115,7 +115,7 @@ namespace ZLPLibrary.ViewModel
         }
         public ObservableCollection<ShortBook> GetSearchResults(string queryString)
         {
-            var normalizedQuery = queryString?.ToLower() ?? null;
+            var normalizedQuery = queryString;
             return new ObservableCollection<ShortBook>(AllShortBooks.Where(n => n.bookName.Contains(normalizedQuery)));
         }
         #endregion
@@ -135,12 +135,12 @@ namespace ZLPLibrary.ViewModel
         });
         public MainPageViewModel()
         {
-            Task.Run(() => LoadAllShortBooks());
             _productService = new ProductService();
             _shortbook = new ShortBook();
             _books = new ObservableCollection<ShortBook>();
             AllShortBooks = _books;
             _searchResults = AllShortBooks;
+            Task.Run(() => LoadAllShortBooks());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

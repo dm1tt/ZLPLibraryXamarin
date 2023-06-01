@@ -1,20 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using ZLPLibrary.ViewModel;
 
 namespace ZLPLibrary.View
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AddTicketPage : ContentPage
+    public partial class AddTicketPage : ContentPage
 	{
-		public AddTicketPage ()
+		public AddTicketPage (int bookId)
 		{
 			InitializeComponent ();
-		}
-	}
+            NavigationPage.SetHasNavigationBar(this, false);
+            BindingContext = new AddTicketPageViewModel(bookId);
+        }
+        async void OnTappedToBack(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
+
+    }
 }

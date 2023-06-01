@@ -13,12 +13,6 @@ namespace ZLPLibrary.View
             NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = new PersonListPageViewModel();
         }
-        private async void OnTapped(object sender, EventArgs e)
-        {
-            var frame = sender as Frame;
-            var reader = frame.BindingContext as Reader;
-            await Navigation.PushAsync(new ReaderPage(reader));
-        }
         private async void OnTappedAddNewReader(object sender, System.EventArgs e)
         {
             await Navigation.PushAsync(new AddNewPersonPage());

@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,6 +55,10 @@ namespace ZLPLibrary.Service
             {
                 throw new Exception("Failed to add book.");
             }
+        }
+        public async Task GiveBookToReaderAsync(int readerId, int bookId)
+        {
+            var response = await _httpClient.PutAsync($"{BaseUrl}/readers/book?bookId={bookId}&readerId={readerId}", null);
         }
     }
 }

@@ -82,9 +82,6 @@
                             <Frame CornerRadius="7"
                                    HasShadow="True"
                                    Margin="-5">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer  Tapped="OnTapped" />
-                                </Frame.GestureRecognizers>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="50"/>
@@ -123,6 +120,7 @@
                                            FontFamily="Roboto-Light"
                                            TextColor="Black"
                                            FontSize="15"
+                                           LineBreakMode="TailTruncation"
                                            HorizontalOptions="CenterAndExpand"/>
                                     <Frame Grid.ColumnSpan="3"
                                            Grid.Row="1"

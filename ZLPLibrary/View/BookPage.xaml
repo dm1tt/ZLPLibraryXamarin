@@ -61,11 +61,11 @@
                 <StackLayout BindableLayout.ItemsSource="{Binding FullBookResponse}">
                     <Frame Margin="10"
                            HeightRequest="100"
-                           WidthRequest="70"
+                           WidthRequest="80"
                            CornerRadius="10"
                            HorizontalOptions="Center"
                            VerticalOptions="Center">
-                        <Image Source="Berserk.jpg"
+                        <Image Source="MainPageBook.png"
                                Aspect="AspectFill"
                                Margin="-20"/>
                     </Frame>
@@ -129,6 +129,45 @@
                                       TextColor="Black"
                                       FontSize="15"/>
                                 <Span Text="{Binding FullBookResponse.book.yearOfPublication}"
+                                      FontFamily="Roboto-Light"
+                                      TextColor="Black"
+                                      FontSize="15"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Padding="10,0,0,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Держатель: "
+                                      FontFamily="Roboto-Light"
+                                      TextColor="Black"
+                                      FontSize="15"/>
+                                <Span Text="{Binding FullBookResponse.readerTicketUsers[0].Reader.secondName}"
+                                       FontFamily="Roboto-Light"
+                                      TextColor="Black"
+                                      FontSize="15"/>
+                                <Span Text=" "/>
+                                <Span Text="{Binding FullBookResponse.readerTicketUsers[0].Reader.firstName}"
+                                       FontFamily="Roboto-Light"
+                                      TextColor="Black"
+                                      FontSize="15"/>
+                                <Span Text=" "/>
+                                <Span Text="{Binding FullBookResponse.readerTicketUsers[0].Reader.thirdName}"
+                                       FontFamily="Roboto-Light"
+                                      TextColor="Black"
+                                      FontSize="15"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label Padding="10,0,0,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Дата получения: "
+                                      FontFamily="Roboto-Light"
+                                      TextColor="Black"
+                                      FontSize="15"/>
+                                <Span Text="{Binding FullBookResponse.readerTicketUsers[0].receivingDate}"
                                       FontFamily="Roboto-Light"
                                       TextColor="Black"
                                       FontSize="15"/>

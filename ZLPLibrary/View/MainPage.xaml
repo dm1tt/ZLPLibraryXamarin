@@ -11,7 +11,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
                 <RowDefinition Height="25" />
-                <RowDefinition Height="30" />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -54,30 +53,6 @@
                     <TapGestureRecognizer Command="{Binding CancelngSearch}" CommandParameter=""/>
                 </Label.GestureRecognizers>
             </Label>
-            <Button Text="Фильтры"
-                    BackgroundColor="#FF8F40"
-                    TextColor="White"
-                    FontSize="12"
-                    FontFamily="Roboto-Bold"
-                    CornerRadius="10"
-                    TextTransform="None"
-                    Margin="0"
-                    Padding="0"
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    HorizontalOptions="CenterAndExpand"/>
-            <Button Text="Сортировать"
-                    BackgroundColor="#FF8F40"
-                    TextColor="White"
-                    FontSize="12"
-                    FontFamily="Roboto-Bold"
-                    CornerRadius="10"                        
-                    TextTransform="None"
-                    Margin="0"
-                    Padding="0"
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    HorizontalOptions="CenterAndExpand"/>
             <Frame Grid.Row="0"
                    Grid.Column="1"
                    HorizontalOptions="End"
@@ -99,7 +74,7 @@
                     <TapGestureRecognizer Tapped="OnTappedAddNewBook"/>
                 </Frame.GestureRecognizers>
             </Frame>            
-            <ScrollView  Grid.Row="3"
+            <ScrollView  Grid.Row="2"
                          Grid.ColumnSpan="2">
                 <FlexLayout BindableLayout.ItemsSource="{Binding SearchResults}"
                             Direction="Row"
@@ -116,13 +91,9 @@
                                     <TapGestureRecognizer  Tapped="OnTapped" />
                                 </Frame.GestureRecognizers>
                                 <StackLayout Orientation="Vertical">
-                                    <Frame CornerRadius="5"
-                                           Padding="0,10">
-                                        <Image Source="Berserk.jpg"
-                                             HeightRequest="100"
-                                             Aspect="AspectFill"
-                                             Margin="-10"/>
-                                    </Frame>
+                                    <Image Source="MainPageBook.png"
+                                             HeightRequest="100"/>
+                                    
                                     <Label Text="{Binding bookName}"
                                        WidthRequest="100"
                                        FontFamily="Roboto-Light"
@@ -132,14 +103,7 @@
                                        VerticalTextAlignment="Center"
                                        LineBreakMode="TailTruncation"/>
                                     <Frame  Padding="0.1"
-                                        HasShadow="True"/>
-                                    <Label Text="{Binding inStock}"
-                                       WidthRequest="100"
-                                       FontFamily="Roboto-Light"
-                                       FontSize="12"
-                                       TextColor="Black"
-                                       Margin="-4"
-                                       Padding="7,0,0,0"/>
+                                            HasShadow="True"/>
                                     <Label Text="{Binding yearOfPublishing}"
                                        WidthRequest="100"
                                        LineBreakMode="TailTruncation"

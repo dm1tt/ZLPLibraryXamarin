@@ -1,11 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:ZLPLibrary.ViewModel"
+             xmlns:viewmodel="clr-namespace:ZLPLibrary.ViewModel"
+             x:DataType="viewmodel:AddTicketPageViewModel"
              x:Class="ZLPLibrary.View.AddTicketPage">
-    <ContentPage.BindingContext>
-        <local:AddTicketPageViewModel/>
-    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -42,7 +40,77 @@
                    HeightRequest="40"
                    WidthRequest="58"
                    HorizontalOptions="Start"
-                   Padding="5"/>
+                   Padding="5">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTappedToBack"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <CollectionView ItemsSource="{Binding AllReaders}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedReader}"
+                            SelectionChangedCommand ="{Binding SelectindReaderCommand}"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="7"
+                                   HasShadow="True"
+                                   Margin="-5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="19"/>
+                                    <RowDefinition Height="0.01"/>
+                                    <RowDefinition Height="19"/>
+                                </Grid.RowDefinitions>
+                                <Image Source="User.png"
+                                           Grid.Column="0"
+                                           Grid.RowSpan="3"
+                                           Scale="1.5"
+                                           HeightRequest="50"
+                                           VerticalOptions="Center"/>
+                                <Label Text="{Binding secondName}"
+                                           Grid.Column="1"
+                                           Grid.Row="0"
+                                           FontFamily="Roboto-Light"
+                                           TextColor="Black"
+                                           FontSize="15"
+                                           HorizontalOptions="CenterAndExpand"/>
+                                <Label Text="{Binding firstName}"
+                                           Grid.Column="2"
+                                           Grid.Row="0"
+                                           FontFamily="Roboto-Light"
+                                           TextColor="Black"
+                                           FontSize="15"
+                                           HorizontalOptions="CenterAndExpand"/>
+                                <Label Text="{Binding thirdName}"
+                                           Grid.Column="3"
+                                           Grid.Row="0"
+                                           FontFamily="Roboto-Light"
+                                           TextColor="Black"
+                                           FontSize="15"
+                                           HorizontalOptions="CenterAndExpand"/>
+                                <Frame Grid.ColumnSpan="3"
+                                           Grid.Row="1"
+                                           Grid.Column="1"
+                                           Padding="0.1"/>
+                                <Label Text="{Binding ticketNumber}"
+                                           Grid.Row="2"
+                                           Grid.Column="1"
+                                           Grid.ColumnSpan="3"
+                                           FontFamily="Roboto-Light"
+                                           TextColor="Black"
+                                           FontSize="15"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
